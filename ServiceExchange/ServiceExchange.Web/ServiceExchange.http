@@ -1,6 +1,6 @@
 @ServiceExchange_HostAddress = http://localhost:5134
 
-GET {{ServiceExchange_HostAddress}}/weatherforecast/
+GET {{ServiceExchange_HostAddress}}/Categories/{CategoryId:int}
 Accept: application/json
 
 ###

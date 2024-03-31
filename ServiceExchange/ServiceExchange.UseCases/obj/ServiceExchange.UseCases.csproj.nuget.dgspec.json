@@ -4,14 +4,14 @@
     "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj": {}
   },
   "projects": {
-    "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj": {
+    "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\ServiceExchange.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
-        "projectName": "ServiceExchange.UseCases",
-        "projectPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
+        "projectUniqueName": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\ServiceExchange.Core.csproj",
+        "projectName": "ServiceExchange.Core",
+        "projectPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\ServiceExchange.Core.csproj",
         "packagesPath": "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\",
-        "outputPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\obj\\",
+        "outputPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dmitrii.nieliepin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Ardalis.SharedKernel": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +61,76 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
+        "projectName": "ServiceExchange.UseCases",
+        "projectPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
+        "packagesPath": "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\",
+        "outputPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\dmitrii.nieliepin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\ServiceExchange.Core.csproj": {
+                "projectPath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.Core\\ServiceExchange.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Ardalis.Result": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Ardalis.SharedKernel": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

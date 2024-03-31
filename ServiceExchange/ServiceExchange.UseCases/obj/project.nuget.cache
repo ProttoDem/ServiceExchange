@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "00ViuzSnXBc2GpNZONggaBRGvwxG/F4UHNB5+SSNW1/CMg6j3xUPcc7WPwt4fn12ZQ81oSfXuM2dA8rwniMd8Q==",
+  "dgSpecHash": "a3PxZd7L4Kg9aIGyiAW45GgsqlcJc6ImoE2kBMug5LVD+Jv7LaXYIuyUtdZyVj95baQh8HofpwksFW65dVERhw==",
   "success": true,
   "projectFilePath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\ardalis.guardclauses\\4.1.1\\ardalis.guardclauses.4.1.1.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\ardalis.result\\8.0.0\\ardalis.result.8.0.0.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\ardalis.sharedkernel\\1.5.0\\ardalis.sharedkernel.1.5.0.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\ardalis.specification\\7.0.0\\ardalis.specification.7.0.0.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\system.text.json\\7.0.3\\system.text.json.7.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

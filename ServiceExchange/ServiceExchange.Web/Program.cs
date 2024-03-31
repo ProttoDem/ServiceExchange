@@ -1,110 +1,123 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
+using System.Reflection;
+using Ardalis.ListStartupServices;
+using Ardalis.SharedKernel;
 using FastEndpoints;
-using FastEndpoints.Security;
-using Microsoft.OpenApi.Models;
-using TaskWebApiLab.Core;
-using TaskWebApiLab.Infrastructure;
-using TaskWebApiLab.Infrastructure.Data;
-using Microsoft.Extensions.DependencyInjection;
+using FastEndpoints.Swagger;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+using Serilog;
+using Serilog.Extensions.Logging;
+using Service.UseCases.Categories.Update;
+using ServiceExchange.Core.CategoryAggregate;
+using ServiceExchange.Infrastructure;
+
+var logger = Log.Logger = new LoggerConfiguration()
+  .Enrich.FromLogContext()
+  .WriteTo.Console()
+  .CreateLogger();
+
+logger.Information("Starting web host");
 
 var builder = WebApplication.CreateBuilder(args);
-ConfigurationManager configuration = builder.Configuration;
 
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
+var microsoftLogger = new SerilogLoggerFactory(logger)
+    .CreateLogger<Program>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr"), b=> b.MigrationsAssembly("TaskWebApiLab")));
-builder.Services.AddFastEndpoints();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddMicrosoftIdentityWebApi(options =>
+  {
+    builder.Configuration.Bind("AzureAd", options);
+    options.TokenValidationParameters.NameClaimType = "name";
+  }, options => { builder.Configuration.Bind("AzureAd", options); });
 
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddUserManager<UserManager<IdentityUser>>()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthorization(config =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(options =>
-    {
-        options.SaveToken = true;
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudience = configuration["JWT:ValidAudience"],
-            ValidIssuer = configuration["JWT:ValidIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
-        };
-    });
-builder.Services.AddAuthorization();
-builder.Services.AddHttpContextAccessor();
-
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
-{
-    containerBuilder.RegisterModule(new DefaultCoreModule());
-    containerBuilder.RegisterModule(new AutofacInfrastructureModule(builder.Environment.IsDevelopment()));
+  config.AddPolicy("AuthZPolicy", policyBuilder =>
+    policyBuilder.Requirements.Add(new ScopeAuthorizationRequirement() { RequiredScopesConfigurationKey = $"AzureAd:Scopes" }));
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(setup =>
+// Configure Web Behavior
+builder.Services.Configure<CookiePolicyOptions>(options =>
 {
-    // Include 'SecurityScheme' to use JWT Authentication
-    var jwtSecurityScheme = new OpenApiSecurityScheme
-    {
-        BearerFormat = "JWT",
-        Name = "JWT Authentication",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
-
-        Reference = new OpenApiReference
-        {
-            Id = JwtBearerDefaults.AuthenticationScheme,
-            Type = ReferenceType.SecurityScheme
-        }
-    };
-
-    setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
-    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        { jwtSecurityScheme, Array.Empty<string>() }
-    });
-
+  options.CheckConsentNeeded = context => true;
+  options.MinimumSameSitePolicy = SameSiteMode.None;
 });
+
+builder.Services.AddFastEndpoints()
+                .SwaggerDocument(o =>
+                {
+                  o.ShortSchemaNames = true;
+                });
+
+ConfigureMediatR();
+
+builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
+
+if (builder.Environment.IsDevelopment())
+{
+  // Use a local test email server
+  // See: https://ardalis.com/configuring-a-local-test-email-server/
+  //builder.Services.AddScoped<IEmailSender, MimeKitEmailSender>();
+
+  // Otherwise use this:
+  //builder.Services.AddScoped<IEmailSender, FakeEmailSender>();
+  AddShowAllServicesSupport();
+}
+else
+{
+  //builder.Services.AddScoped<IEmailSender, MimeKitEmailSender>();
+}
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseAuthentication();
+app.UseAuthorization();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    
+  app.UseDeveloperExceptionPage();
+  app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
 }
-app.UseDeveloperExceptionPage();
+else
+{
+  app.UseDefaultExceptionHandler(); // from FastEndpoints
+  app.UseHsts();
+}
+
+app.UseFastEndpoints()
+    .UseSwaggerGen(); // Includes AddFileServer and static files middleware
 
 app.UseHttpsRedirection();
 
-// Authentication & Authorization
-app.UseAuthentication().UseAuthorization();
-app.UseFastEndpoints();
-
-
-app.UseStaticFiles();
-
 app.Run();
 
-public partial class Program { }
+void ConfigureMediatR()
+{
+  var mediatRAssemblies = new[]
+{
+  Assembly.GetAssembly(typeof(Category)), // Core
+  Assembly.GetAssembly(typeof(UpdateCategoryCommand)) // UseCases
+};
+  builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
+  builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+  builder.Services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
+}
+
+void AddShowAllServicesSupport()
+{
+  // add list services for diagnostic purposes - see https://github.com/ardalis/AspNetCoreStartupServices
+  builder.Services.Configure<ServiceConfig>(config =>
+  {
+    config.Services = new List<ServiceDescriptor>(builder.Services);
+
+    // optional - default path to view services is /listallservices - recommended to choose your own path
+    config.Path = "/listservices";
+  });
+}
+
+// Make the implicit Program.cs class public, so integration tests can reference the correct assembly for host building
+public partial class Program
+{
+}

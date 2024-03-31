@@ -8,13 +8,32 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Ardalis.ListStartupServices" Version="1.1.4" />
+        <PackageReference Include="Ardalis.SharedKernel" Version="1.5.0" />
         <PackageReference Include="Autofac" Version="8.0.0" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="FastEndpoints" Version="5.23.0" />
         <PackageReference Include="FastEndpoints.Security" Version="5.23.0" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="5.23.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Identity.Web" Version="2.17.2" />
+        <PackageReference Include="Serilog" Version="3.1.1" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ServiceExchange.Infrastructure\ServiceExchange.Infrastructure.csproj" />
+      <ProjectReference Include="..\ServiceExchange.UseCases\ServiceExchange.UseCases.csproj" />
     </ItemGroup>
 
 </Project>
