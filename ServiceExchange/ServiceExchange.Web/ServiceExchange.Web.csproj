@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>ServiceExchange</RootNamespace>
+        <RootNamespace>ServiceExchange.Web</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -38,11 +38,6 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\css\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Categories\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_SelectLanguagePartial.cshtml" />
     </ItemGroup>
 
 </Project>

@@ -55,8 +55,6 @@ ConfigureMediatR();
 
 builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
 
-//builder.Services.AddRazorPages();
-
 if (builder.Environment.IsDevelopment())
 {
   // Use a local test email server

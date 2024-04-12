@@ -20,10 +20,7 @@ builder.Services.AddAuthorization(options =>
 });*/
 // Add IHttpClientFactory to the container and sets the name of the factory
 // to "FruitAPI", and the also sets the base address used in calls
-builder.Services.AddHttpClient("ServiceExchangeAPI", httpClient =>
-{
-    httpClient.BaseAddress = new Uri("http://localhost:5134/api");
-});
+builder.Services.AddHttpClient();
 
 builder.Services.AddLocalization( options => options.ResourcesPath = "Resources" );
 
