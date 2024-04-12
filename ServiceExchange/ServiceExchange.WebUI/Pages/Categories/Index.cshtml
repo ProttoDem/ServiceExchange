@@ -1,0 +1,21 @@
+﻿@page
+@model ServiceExchange.WebUI.Pages.Categories.Index
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>@Localizer["Categories"]</h2>
+
+@if(Model.CategoriesList.Any())
+{
+<ul>
+    @foreach(var category in Model.CategoriesList)
+    {
+    <li>
+        <strong>@category.Title</strong> - @category.Description
+    </li>
+    }
+</ul>
+}
+else
+{
+<p>No categories found.</p>
+}

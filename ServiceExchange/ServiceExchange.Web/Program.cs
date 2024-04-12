@@ -55,6 +55,8 @@ ConfigureMediatR();
 
 builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
 
+//builder.Services.AddRazorPages();
+
 if (builder.Environment.IsDevelopment())
 {
   // Use a local test email server
@@ -88,6 +90,11 @@ else
 
 app.UseFastEndpoints()
     .UseSwaggerGen(); // Includes AddFileServer and static files middleware
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+//app.MapRazorPages();
 
 app.UseHttpsRedirection();
 

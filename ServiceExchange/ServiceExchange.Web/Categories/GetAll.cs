@@ -11,7 +11,7 @@ public class GetAll(IMediator _mediator) : EndpointWithoutRequest<GetAllCategori
 {
     public override void Configure()
     {
-        Get("/Categories");
+        Get("/api/Categories");
         AllowAnonymous();
     }
 

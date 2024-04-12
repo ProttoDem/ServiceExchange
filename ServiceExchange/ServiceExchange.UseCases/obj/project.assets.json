@@ -89,6 +89,22 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.MicrosoftAccount/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
         "type": "package",
         "compile": {
@@ -272,6 +288,21 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.2.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.MicrosoftAccount/8.0.3": {
+      "sha512": "/YpivbZ0a9Ycwq4MneSqo2/OwnVL7iiinl8Qpt2Q9pnHkhe6UArrdjaGabAYy1CGGi+i7SLSx9vD5FeDd9aG1w==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.microsoftaccount/8.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll",
+        "lib/net8.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.xml",
+        "microsoft.aspnetcore.authentication.microsoftaccount.8.0.3.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.microsoftaccount.nuspec"
       ]
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
@@ -481,6 +512,7 @@
     "net8.0": [
       "Ardalis.Result >= 8.0.0",
       "Ardalis.SharedKernel >= 1.5.0",
+      "Microsoft.AspNetCore.Authentication.MicrosoftAccount >= 8.0.3",
       "ServiceExchange.Core >= 1.0.0"
     ]
   },
@@ -534,6 +566,10 @@
           "Ardalis.SharedKernel": {
             "target": "Package",
             "version": "[1.5.0, )"
+          },
+          "Microsoft.AspNetCore.Authentication.MicrosoftAccount": {
+            "target": "Package",
+            "version": "[8.0.3, )"
           }
         },
         "imports": [

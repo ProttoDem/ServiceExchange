@@ -36,4 +36,13 @@
       <ProjectReference Include="..\ServiceExchange.UseCases\ServiceExchange.UseCases.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\css\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Categories\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_SelectLanguagePartial.cshtml" />
+    </ItemGroup>
+
 </Project>

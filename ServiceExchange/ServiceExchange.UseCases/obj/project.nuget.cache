@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "a3PxZd7L4Kg9aIGyiAW45GgsqlcJc6ImoE2kBMug5LVD+Jv7LaXYIuyUtdZyVj95baQh8HofpwksFW65dVERhw==",
+  "dgSpecHash": "NOsnJiXR1oKKVj4e8aRgNAKM80k7obnIn0IK086+dGO0K6JFQjb88o32oAvWgaKRf3pqq5V4TaRKAjABUs55JQ==",
   "success": true,
   "projectFilePath": "C:\\Diplom_Project\\API\\ServiceExchange\\ServiceExchange\\ServiceExchange.UseCases\\ServiceExchange.UseCases.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\ardalis.specification\\7.0.0\\ardalis.specification.7.0.0.nupkg.sha512",
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\microsoft.aspnetcore.authentication.microsoftaccount\\8.0.3\\microsoft.aspnetcore.authentication.microsoftaccount.8.0.3.nupkg.sha512",
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
     "C:\\Users\\dmitrii.nieliepin\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
