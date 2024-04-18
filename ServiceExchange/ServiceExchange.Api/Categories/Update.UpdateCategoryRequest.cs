@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ServiceExchange.Web.Categories;
+namespace ServiceExchange.Api.Categories;
 
 public class UpdateCategoryRequest
 {

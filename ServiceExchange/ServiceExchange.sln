@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceExchange.Web", "ServiceExchange.Web\ServiceExchange.Web.csproj", "{EBF36018-BB85-4272-8A6F-72AC6F909D30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceExchange.Api", "ServiceExchange.Api\ServiceExchange.Api.csproj", "{EBF36018-BB85-4272-8A6F-72AC6F909D30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceExchange.Infrastructure", "ServiceExchange.Infrastructure\ServiceExchange.Infrastructure.csproj", "{34F0EA39-32B9-4296-A9F7-863518C1F7D7}"
 EndProject

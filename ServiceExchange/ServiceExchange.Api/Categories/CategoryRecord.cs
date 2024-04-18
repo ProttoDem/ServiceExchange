@@ -1,3 +1,3 @@
-﻿namespace ServiceExchange.Web.Categories;
+﻿namespace ServiceExchange.Api.Categories;
 
 public record CategoryRecord(Guid Id, string Title, string? Description);

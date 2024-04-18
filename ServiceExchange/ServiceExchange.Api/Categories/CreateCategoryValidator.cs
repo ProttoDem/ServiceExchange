@@ -2,7 +2,7 @@
 using FluentValidation;
 using ServiceExchange.Infrastructure.Data.Config;
 
-namespace ServiceExchange.Web.Categories;
+namespace ServiceExchange.Api.Categories;
 
 public class CreateCategoryValidator : Validator<CreateCategoryRequest>
 {

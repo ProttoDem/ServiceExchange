@@ -1,4 +1,4 @@
-﻿namespace ServiceExchange.Web.Categories;
+﻿namespace ServiceExchange.Api.Categories;
 
 public class CreateCategoryResponse(Guid id, string title, string? description)
 {

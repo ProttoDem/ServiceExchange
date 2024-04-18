@@ -23,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
 var microsoftLogger = new SerilogLoggerFactory(logger)
-    .CreateLogger<ServiceExchange.Web.Program>();
+    .CreateLogger<ServiceExchange.Api.Program>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddMicrosoftIdentityWebApi(options =>
@@ -123,7 +123,7 @@ void AddShowAllServicesSupport()
 }
 
 // Make the implicit Program.cs class public, so integration tests can reference the correct assembly for host building
-namespace ServiceExchange.Web
+namespace ServiceExchange.Api
 {
   public partial class Program
   {

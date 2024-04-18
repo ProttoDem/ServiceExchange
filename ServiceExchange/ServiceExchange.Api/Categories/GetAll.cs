@@ -4,7 +4,7 @@ using MediatR;
 using Service.UseCases.Categories;
 using Service.UseCases.Categories.GetAll;
 
-namespace ServiceExchange.Web.Categories;
+namespace ServiceExchange.Api.Categories;
 
 public class GetAll(IMediator _mediator) : EndpointWithoutRequest<GetAllCategoriesResponse>
 {
