@@ -4,7 +4,7 @@ using MediatR;
 using Service.UseCases.Categories.Get;
 using Service.UseCases.Categories.Update;
 
-namespace ServiceExchange.Categories;
+namespace ServiceExchange.Web.Categories;
 
 /// <summary>
 /// Update an existing Contributor.

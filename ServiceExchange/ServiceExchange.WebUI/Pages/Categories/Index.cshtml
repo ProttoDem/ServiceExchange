@@ -4,10 +4,10 @@
 
 <h2>@Localizer["Categories"]</h2>
 
-@if(Model.CategoriesList.Any())
+@if(Model.CategoriesList.Categories.Any())
 {
 <ul>
-    @foreach(var category in Model.CategoriesList)
+    @foreach(var category in Model.CategoriesList.Categories)
     {
     <li>
         <strong>@category.Title</strong> - @category.Description

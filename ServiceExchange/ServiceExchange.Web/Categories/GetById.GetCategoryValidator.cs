@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using FluentValidation;
 
-namespace ServiceExchange.Categories;
+namespace ServiceExchange.Web.Categories;
 
 public class GetCategoryValidator : Validator<GetCategoryByIdRequest>
 {

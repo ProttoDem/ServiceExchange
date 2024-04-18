@@ -2,7 +2,7 @@
 using MediatR;
 using Service.UseCases.Categories.Create;
 
-namespace ServiceExchange.Categories;
+namespace ServiceExchange.Web.Categories;
 
 public class Create(IMediator _mediator)
     : Endpoint<CreateCategoryRequest, CreateCategoryResponse>

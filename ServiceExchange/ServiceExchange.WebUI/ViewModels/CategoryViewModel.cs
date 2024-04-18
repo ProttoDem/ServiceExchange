@@ -1,3 +1,8 @@
-﻿namespace WebApplication1.ViewModels;
+﻿namespace ServiceExchange.WebUI.ViewModels;
 
-public record CategoryViewModel(Guid Id, string Title, string? Description);
+public class CategoryViewModel(Guid id, string title, string? description)
+{
+    public Guid Id { get; set; } = id;
+    public string Title { get; set; } = title;
+    public string? Description { get; set; } = description;
+}

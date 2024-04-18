@@ -1,11 +1,10 @@
 ﻿using Ardalis.Result;
 using FastEndpoints;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Service.UseCases.Categories;
 using Service.UseCases.Categories.GetAll;
 
-namespace ServiceExchange.Categories;
+namespace ServiceExchange.Web.Categories;
 
 public class GetAll(IMediator _mediator) : EndpointWithoutRequest<GetAllCategoriesResponse>
 {

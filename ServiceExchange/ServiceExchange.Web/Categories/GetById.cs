@@ -3,7 +3,7 @@ using FastEndpoints;
 using MediatR;
 using Service.UseCases.Categories.Get;
 
-namespace ServiceExchange.Categories;
+namespace ServiceExchange.Web.Categories;
 
 public class GetById(IMediator _mediator)
     : Endpoint<GetCategoryByIdRequest, CategoryRecord>

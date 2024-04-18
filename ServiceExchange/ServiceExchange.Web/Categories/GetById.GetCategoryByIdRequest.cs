@@ -1,4 +1,4 @@
-﻿namespace ServiceExchange.Categories;
+﻿namespace ServiceExchange.Web.Categories;
 
 public class GetCategoryByIdRequest
 {

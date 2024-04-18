@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApplication1.ViewModels;
+using ServiceExchange.WebUI.ViewModels;
 
 namespace ServiceExchange.WebUI.Pages.Categories;
 
@@ -13,7 +13,14 @@ public class Index : PageModel
         _httpClientFactory = httpClientFactory;
     }
     // Property to hold categories
-    public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
+    //public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
+
+    public CategoriesResponse CategoriesList = new CategoriesResponse();
+
+    public class CategoriesResponse
+    {
+        public IList<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+    }
     
     public async Task OnGet()
     {
@@ -29,8 +36,8 @@ public class Index : PageModel
         // If the operation is successful deserialize the results into the data model
         if (response.IsSuccessStatusCode)
         {
-            using var contentStream = await response.Content.ReadAsStreamAsync();
-            CategoriesList = await JsonSerializer.DeserializeAsync<IEnumerable<CategoryViewModel>>(contentStream);
+            var contentStream = await response.Content.ReadAsStringAsync();
+            CategoriesList = JsonSerializer.Deserialize<CategoriesResponse>(contentStream);
         }
     }
 }
