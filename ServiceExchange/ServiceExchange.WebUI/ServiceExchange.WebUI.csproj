@@ -59,4 +59,12 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="WebUIconfig.config">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

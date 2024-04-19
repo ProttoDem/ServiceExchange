@@ -19,6 +19,7 @@ public class Update(IMediator _mediator)
     public override void Configure()
     {
         Put(UpdateCategoryRequest.Route);
+        Version(1);
         AllowAnonymous();
     }
 

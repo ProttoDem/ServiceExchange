@@ -10,6 +10,7 @@ public class Create(IMediator _mediator)
     public override void Configure()
     {
         Post(CreateCategoryRequest.Route);
+        Version(1);
         Policies("AuthZPolicy");
         Summary(s =>
         {

@@ -11,6 +11,7 @@ public class GetById(IMediator _mediator)
     public override void Configure()
     {
         Get(GetCategoryByIdRequest.Route);
+        Version(1);
         AllowAnonymous();
     }
 

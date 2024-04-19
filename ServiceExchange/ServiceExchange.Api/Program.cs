@@ -6,6 +6,7 @@ using FastEndpoints.Swagger;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Service.UseCases.Categories.Update;
@@ -45,11 +46,14 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
   options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
-builder.Services.AddFastEndpoints()
-                .SwaggerDocument(o =>
-                {
-                  o.ShortSchemaNames = true;
-                });
+builder.Services.AddFastEndpoints().SwaggerDocument(o =>
+  {
+    o.DocumentSettings = s =>
+    {
+      s.Title = "ServiceExchangeApi";
+      s.Version = "v1";
+    };
+  });
 
 ConfigureMediatR();
 
@@ -86,7 +90,11 @@ else
   app.UseHsts();
 }
 
-app.UseFastEndpoints()
+app.UseFastEndpoints(c =>
+  {
+    c.Endpoints.RoutePrefix = "api";
+    c.Versioning.Prefix = "v";
+  })
     .UseSwaggerGen(); // Includes AddFileServer and static files middleware
 
 app.UseDefaultFiles();
