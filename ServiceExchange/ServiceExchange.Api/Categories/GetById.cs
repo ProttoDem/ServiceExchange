@@ -12,7 +12,7 @@ public class GetById(IMediator _mediator)
     {
         Get(GetCategoryByIdRequest.Route);
         Version(1);
-        AllowAnonymous();
+        Policies("RegisteredUser");
     }
 
     public override async Task HandleAsync(GetCategoryByIdRequest request,

@@ -20,7 +20,7 @@ public class Update(IMediator _mediator)
     {
         Put(UpdateCategoryRequest.Route);
         Version(1);
-        AllowAnonymous();
+        Policies("AdminUser");
     }
 
     public override async Task HandleAsync(

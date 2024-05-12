@@ -34,6 +34,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_Layout.fr.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\_LoginPartial.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_LoginPartial.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -57,14 +61,15 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>_Layout.fr.resx</DependentUpon>
       </Compile>
+      <Compile Update="Resources\Pages\_LoginPartial.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_LoginPartial.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="WebUIconfig.config">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </None>
+      <Folder Include="Pages\Reports\" />
     </ItemGroup>
 
 </Project>

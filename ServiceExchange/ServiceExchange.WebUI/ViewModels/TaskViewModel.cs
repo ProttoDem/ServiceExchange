@@ -2,14 +2,14 @@
 
 namespace ServiceExchange.WebUI.ViewModels;
 
-public class CategoryViewModel(Guid id, string title, string? description)
+public class TaskViewModel(Guid id, string title, string? description)
 {
-    [JsonPropertyName("Id")]
+    [JsonPropertyName("id")]
     public Guid Id { get; set; } = id;
     
-    [JsonPropertyName("Title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; } = title;
     
-    [JsonPropertyName("Description")]
+    [JsonPropertyName("description")]
     public string? Description { get; set; } = description;
 }

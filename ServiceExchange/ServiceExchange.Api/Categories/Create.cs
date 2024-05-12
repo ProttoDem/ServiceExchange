@@ -11,7 +11,7 @@ public class Create(IMediator _mediator)
     {
         Post(CreateCategoryRequest.Route);
         Version(1);
-        Policies("AuthZPolicy");
+        Policies("AdminUser");
         Summary(s =>
         {
             // XML Docs are used by default but are overridden by these properties:

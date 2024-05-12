@@ -2,5 +2,5 @@
 
 public class GetAllCategoriesResponse
 {
-    public List<CategoryRecord> Categories { get; set; } = [];
+    public IEnumerable<CategoryRecord> Categories { get; set; } = [];
 }

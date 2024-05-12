@@ -11,8 +11,8 @@ public class GetAll(IMediator _mediator) : EndpointWithoutRequest<GetAllCategori
     public override void Configure()
     {
         Get("/Categories");
+        Policies("AdminUser");
         Version(1);
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken cancellationToken)

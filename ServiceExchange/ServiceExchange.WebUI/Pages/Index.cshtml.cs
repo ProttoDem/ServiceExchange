@@ -1,8 +1,13 @@
+using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Identity.Abstractions;
+using Microsoft.Identity.Web;
 
 namespace ServiceExchange.WebUI.Pages;
 
+[AllowAnonymous]
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
@@ -12,7 +17,7 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public async Task OnGet()
     {
     }
 }

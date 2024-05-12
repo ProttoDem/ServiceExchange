@@ -35,8 +35,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization(config =>
 {
-  config.AddPolicy("AuthZPolicy", policyBuilder =>
+  config.AddPolicy("RegisteredUser", policyBuilder =>
     policyBuilder.Requirements.Add(new ScopeAuthorizationRequirement() { RequiredScopesConfigurationKey = $"AzureAd:Scopes" }));
+  config.AddPolicy("AdminUser", policyBuilder =>
+    policyBuilder.Requirements.Add(new ScopeAuthorizationRequirement() { RequiredScopesConfigurationKey = $"AzureAd:AdminScopes" }));
 });
 
 // Configure Web Behavior

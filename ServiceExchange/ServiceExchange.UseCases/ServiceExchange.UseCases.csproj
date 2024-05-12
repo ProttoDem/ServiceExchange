@@ -17,4 +17,13 @@
       <ProjectReference Include="..\ServiceExchange.Core\ServiceExchange.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Reports\" />
+      <Folder Include="Tasks\Create\" />
+      <Folder Include="Tasks\Delete\" />
+      <Folder Include="Tasks\GetAll\" />
+      <Folder Include="Tasks\Get\" />
+      <Folder Include="Tasks\Update\" />
+    </ItemGroup>
+
 </Project>

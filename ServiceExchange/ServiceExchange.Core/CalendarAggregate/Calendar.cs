@@ -3,10 +3,10 @@ using Ardalis.SharedKernel;
 
 namespace ServiceExchange.Core.CalendarAggregate;
 
-public class Calendar(DateTime startTime, DateTime endTime, bool isRepeatable) : BaseEntity<Guid>, IAggregateRoot
+public class Calendar(DateTime startTime, DateTime? endTime, bool? isRepeatable) : BaseEntity<Guid>, IAggregateRoot
 {
     public DateTime StartTime { get; private set; } = Guard.Against.NullOrOutOfSQLDateRange(startTime, nameof(startTime));
-    public DateTime? EndTime { get; private set; } = Guard.Against.OutOfSQLDateRange(endTime, nameof(endTime));
+    public DateTime? EndTime { get; private set; } = endTime;
     public bool? IsRepeatable { get; private set; } = isRepeatable;
 
     public void UpdateStartTime(DateTime newStartTime)

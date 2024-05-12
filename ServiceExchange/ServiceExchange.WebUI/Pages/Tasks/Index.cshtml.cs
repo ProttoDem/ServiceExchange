@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceExchange.WebUI.ViewModels;
 
-namespace ServiceExchange.WebUI.Pages.Categories;
+namespace ServiceExchange.WebUI.Pages.Tasks;
 
 public class Index : PageModel
 {
@@ -16,19 +16,19 @@ public class Index : PageModel
     // Property to hold categories
     //public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
 
-    public CategoriesResponse CategoriesList = new CategoriesResponse();
+    public TasksResponse TasksList = new TasksResponse();
 
-    public class CategoriesResponse
+    public class TasksResponse
     {
-        [JsonPropertyName("categories")]
-        public IList<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+        [JsonPropertyName("tasks")]
+        public IList<TaskViewModel> Tasks { get; set; } = new List<TaskViewModel>();
     }
     
     public async Task OnGet()
     {
         // Create the HTTP client using the FruitAPI named factory
         //var httpClient = _httpClientFactory.CreateClient("ServiceExchangeAPI");
-        var msg = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7294/api/Categories/v1");
+        var msg = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7294/api/Tasks/v1");
         var httpClient = _httpClientFactory.CreateClient();
     
         // Execute the GET operation and store the response, the empty parameter
@@ -39,7 +39,7 @@ public class Index : PageModel
         if (response.IsSuccessStatusCode)
         {
             var contentStream = await response.Content.ReadAsStringAsync();
-            CategoriesList = JsonSerializer.Deserialize<CategoriesResponse>(contentStream);
+            TasksList = JsonSerializer.Deserialize<TasksResponse>(contentStream);
         }
     }
 }
