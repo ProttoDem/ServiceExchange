@@ -1,9 +1,6 @@
 ﻿@page
 @model ServiceExchange.WebUI.Pages.Profile.Index
-
-@{
-    Layout = null;
-}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
 
@@ -13,7 +10,11 @@
 </head>
 <body>
 <div>
-    <p><pre><code class="language-js">@ViewData["ApiResult"]</code></pre></p>
+    <p><pre><code class="language-js">@ViewData["user"]</code></pre></p>
+</div>
+<div>
+    <h1>@ViewData["name"]</h1>
+    <h1>@ViewData["birthDate"]</h1>
 </div>
 </body>
 </html>

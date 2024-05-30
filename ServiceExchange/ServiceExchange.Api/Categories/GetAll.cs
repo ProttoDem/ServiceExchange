@@ -10,8 +10,8 @@ public class GetAll(IMediator _mediator) : EndpointWithoutRequest<GetAllCategori
 {
     public override void Configure()
     {
+        AllowAnonymous();
         Get("/Categories");
-        Policies("AdminUser");
         Version(1);
     }
 

@@ -1,9 +1,8 @@
 using System.Globalization;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Graph.Models.ExternalConnectors;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
@@ -11,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 IEnumerable<string>? initialScopes = builder.Configuration.GetSection("ServiceExchangeScopes:Scopes").Get<string[]>();
 
 builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd")
-    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+    .EnableTokenAcquisitionToCallDownstreamApi()
     .AddDownstreamApi("ServiceExchangeApi", builder.Configuration.GetSection("ServiceExchangeScopes"))
-    .AddDownstreamApi("GraphApi", builder.Configuration.GetSection("MicrosoftGraphScopes"))
+    .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraphScopes"))
     .AddInMemoryTokenCaches();
 
 builder.Services.AddHttpClient();

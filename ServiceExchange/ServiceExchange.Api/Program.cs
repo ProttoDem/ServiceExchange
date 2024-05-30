@@ -33,13 +33,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     options.TokenValidationParameters.NameClaimType = "name";
   }, options => { builder.Configuration.Bind("AzureAd", options); });
 
-builder.Services.AddAuthorization(config =>
-{
-  config.AddPolicy("RegisteredUser", policyBuilder =>
-    policyBuilder.Requirements.Add(new ScopeAuthorizationRequirement() { RequiredScopesConfigurationKey = $"AzureAd:Scopes" }));
-  config.AddPolicy("AdminUser", policyBuilder =>
-    policyBuilder.Requirements.Add(new ScopeAuthorizationRequirement() { RequiredScopesConfigurationKey = $"AzureAd:AdminScopes" }));
-});
+builder.Services.AddAuthorization();
 
 // Configure Web Behavior
 builder.Services.Configure<CookiePolicyOptions>(options =>

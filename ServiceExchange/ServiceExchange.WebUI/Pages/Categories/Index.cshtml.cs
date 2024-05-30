@@ -1,10 +1,13 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using ServiceExchange.WebUI.ViewModels;
 
 namespace ServiceExchange.WebUI.Pages.Categories;
 
+[AllowAnonymous]
 public class Index : PageModel
 {
     private readonly IHttpClientFactory _httpClientFactory;
@@ -16,7 +19,7 @@ public class Index : PageModel
     // Property to hold categories
     //public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
 
-    public CategoriesResponse CategoriesList = new CategoriesResponse();
+    public CategoriesResponse CategoriesList = new();
 
     public class CategoriesResponse
     {
@@ -39,7 +42,7 @@ public class Index : PageModel
         if (response.IsSuccessStatusCode)
         {
             var contentStream = await response.Content.ReadAsStringAsync();
-            CategoriesList = JsonSerializer.Deserialize<CategoriesResponse>(contentStream);
+            CategoriesList = JsonConvert.DeserializeObject<CategoriesResponse>(contentStream);
         }
     }
 }
