@@ -1,0 +1,55 @@
+﻿@page
+@model ServiceExchange.WebUI.Pages.Tasks.CreateTask
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Task</title>
+</head>
+<body>
+<h1>Create Task</h1>
+<form method="post">
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label asp-for="StartTime"></label>
+        <input asp-for="StartTime" type="datetime-local" />
+        <span asp-validation-for="StartTime"></span>
+    </div>
+    <div>
+        <label asp-for="FinishTime"></label>
+        <input asp-for="FinishTime" type="datetime-local" />
+        <span asp-validation-for="FinishTime"></span>
+    </div>
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" type="number" step="0.01" />
+        <span asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <label asp-for="CategoryId"></label>
+        <input asp-for="CategoryId" />
+        <span asp-validation-for="CategoryId"></span>
+    </div>
+    <div>
+        <label asp-for="IsRepeatable"></label>
+        <input asp-for="IsRepeatable" type="checkbox" />
+        <span asp-validation-for="IsRepeatable"></span>
+    </div>
+    <button type="submit">Create Task</button>
+</form>
+</body>
+</html>

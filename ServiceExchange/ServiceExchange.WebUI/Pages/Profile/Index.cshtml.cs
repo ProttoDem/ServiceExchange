@@ -1,9 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Graph;
+using Microsoft.Identity.Abstractions;
 using Microsoft.Identity.Web;
-using Newtonsoft.Json;
+using ServiceExchange.WebUI.Responses;
 using ServiceExchange.WebUI.ViewModels;
 
 namespace ServiceExchange.WebUI.Pages.Profile;
@@ -18,42 +20,60 @@ public class Index : PageModel
     
     private readonly IHttpClientFactory _httpClientFactory;
     
+    private readonly IDownstreamApi  _downstreamWebApi;
+    
     public TasksResponse TasksList = new();
+
+    public UserViewModel User = new();
 
     public Index(ILogger<PrivacyModel> logger,
         GraphServiceClient graphServiceClient,
-        IHttpClientFactory httpClientFactory)
+        IDownstreamApi  downstreamWebApi
+        )
     {
         _logger = logger;
         _graphServiceClient = graphServiceClient;
-        _httpClientFactory = httpClientFactory;
+        _downstreamWebApi = downstreamWebApi;
     }
 
     public async Task OnGet()
     {
         var user = await _graphServiceClient.Me.GetAsync();
-        ViewData["user"] = user;
-        ViewData["name"] = user.DisplayName;
-        ViewData["birthDate"] = user.Birthday;
+        User.DisplayName = user.DisplayName;
+        User.Birthdate = user.Birthday;
+        User.Phone = user.MobilePhone;
         
-        var msg = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7294/api/user/tasks/v1");
-        var httpClient = _httpClientFactory.CreateClient();
-    
-        // Execute the GET operation and store the response, the empty parameter
-        // in GetAsync doesn't modify the base address set in the client factory 
-        using HttpResponseMessage response = await httpClient.SendAsync(msg);
-
-        // If the operation is successful deserialize the results into the data model
+        using var response = await _downstreamWebApi.CallApiForUserAsync("ServiceExchangeApi", options =>
+            {
+                options.RelativePath = $"user/v1";
+            }).ConfigureAwait(false);
         if (response.IsSuccessStatusCode)
         {
-            var contentStream = await response.Content.ReadAsStringAsync();
-            TasksList = JsonConvert.DeserializeObject<TasksResponse>(contentStream);
+            await GetTasks();
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}: {error}");
         }
     }
-}
 
-public class TasksResponse
-{
-    [JsonPropertyName("tasks")]
-    public IList<TaskViewModel> Tasks { get; set; } = new List<TaskViewModel>();
+    private async Task GetTasks()
+    {
+        using var response = await _downstreamWebApi.CallApiForUserAsync("ServiceExchangeApi", options =>
+        {
+            options.RelativePath = $"user/tasks/v1";
+        }).ConfigureAwait(false);
+        
+        if (response.IsSuccessStatusCode)
+        {
+            var apiResult = await response.Content.ReadFromJsonAsync<JsonDocument>().ConfigureAwait(false);
+            ViewData["ApiResult"] = JsonSerializer.Serialize(apiResult, new JsonSerializerOptions { WriteIndented = true });
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}: {error}");
+        }
+    }
 }

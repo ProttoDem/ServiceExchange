@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using ServiceExchange.WebUI.Responses;
 using ServiceExchange.WebUI.ViewModels;
 
 namespace ServiceExchange.WebUI.Pages.Categories;
@@ -16,16 +17,8 @@ public class Index : PageModel
     {
         _httpClientFactory = httpClientFactory;
     }
-    // Property to hold categories
-    //public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
 
     public CategoriesResponse CategoriesList = new();
-
-    public class CategoriesResponse
-    {
-        [JsonPropertyName("categories")]
-        public IList<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
-    }
     
     public async Task OnGet()
     {

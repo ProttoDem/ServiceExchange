@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceExchange.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using ServiceExchange.Infrastructure.Data;
 namespace ServiceExchange.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530174502_AddedSystemIdToUser")]
+    partial class AddedSystemIdToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,13 +55,7 @@ namespace ServiceExchange.Infrastructure.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TaskId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TaskId")
-                        .IsUnique();
 
                     b.ToTable("Calendars");
                 });
@@ -123,6 +120,8 @@ namespace ServiceExchange.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CalendarId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Tasks");
@@ -182,24 +181,21 @@ namespace ServiceExchange.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ServiceExchange.Core.CalendarAggregate.Calendar", b =>
+            modelBuilder.Entity("ServiceExchange.Core.TaskAggregate.Task", b =>
                 {
-                    b.HasOne("ServiceExchange.Core.TaskAggregate.Task", "Task")
-                        .WithOne("Calendar")
-                        .HasForeignKey("ServiceExchange.Core.CalendarAggregate.Calendar", "TaskId")
+                    b.HasOne("ServiceExchange.Core.CalendarAggregate.Calendar", "Calendar")
+                        .WithMany()
+                        .HasForeignKey("CalendarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Task");
-                });
-
-            modelBuilder.Entity("ServiceExchange.Core.TaskAggregate.Task", b =>
-                {
                     b.HasOne("ServiceExchange.Core.CategoryAggregate.Category", "Category")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Calendar");
 
                     b.Navigation("Category");
                 });
@@ -223,16 +219,8 @@ namespace ServiceExchange.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ServiceExchange.Core.CategoryAggregate.Category", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
             modelBuilder.Entity("ServiceExchange.Core.TaskAggregate.Task", b =>
                 {
-                    b.Navigation("Calendar")
-                        .IsRequired();
-
                     b.Navigation("TaskUsers");
                 });
 

@@ -1,34 +1,39 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Graph;
+using Microsoft.Identity.Abstractions;
+using Newtonsoft.Json;
+using ServiceExchange.WebUI.Responses;
 using ServiceExchange.WebUI.ViewModels;
 
 namespace ServiceExchange.WebUI.Pages.Tasks;
 
+[AllowAnonymous]
 public class Index : PageModel
 {
+    private readonly ILogger<PrivacyModel> _logger;
+    
     private readonly IHttpClientFactory _httpClientFactory;
+    
+    public TasksResponse TasksList = new();
 
-    public Index(IHttpClientFactory httpClientFactory)
+    public UserViewModel User = new();
+
+    public Index(ILogger<PrivacyModel> logger,
+        IHttpClientFactory httpClientFactory
+    )
     {
         _httpClientFactory = httpClientFactory;
-    }
-    // Property to hold categories
-    //public IEnumerable<CategoryViewModel> CategoriesList { get; set; } = new List<CategoryViewModel>();
-
-    public TasksResponse TasksList = new TasksResponse();
-
-    public class TasksResponse
-    {
-        [JsonPropertyName("tasks")]
-        public IList<TaskViewModel> Tasks { get; set; } = new List<TaskViewModel>();
+        _logger = logger;
     }
     
     public async Task OnGet()
     {
         // Create the HTTP client using the FruitAPI named factory
         //var httpClient = _httpClientFactory.CreateClient("ServiceExchangeAPI");
-        var msg = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7294/api/Tasks/v1");
+        var msg = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7294/api/tasks/v1");
         var httpClient = _httpClientFactory.CreateClient();
     
         // Execute the GET operation and store the response, the empty parameter
@@ -39,7 +44,7 @@ public class Index : PageModel
         if (response.IsSuccessStatusCode)
         {
             var contentStream = await response.Content.ReadAsStringAsync();
-            TasksList = JsonSerializer.Deserialize<TasksResponse>(contentStream);
+            TasksList = JsonConvert.DeserializeObject<TasksResponse>(contentStream);
         }
     }
 }

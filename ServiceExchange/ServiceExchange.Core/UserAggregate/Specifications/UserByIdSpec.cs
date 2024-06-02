@@ -1,6 +1,11 @@
-﻿namespace ServiceExchange.Core.UserAggregate.Specifications;
+﻿using Ardalis.Specification;
 
-public class UserByIdSpec
+namespace ServiceExchange.Core.UserAggregate.Specifications;
+
+public class UserByIdSpec : Specification<User>
 {
-    
+    public UserByIdSpec(string systemId)
+    {
+        Query.Where(user => user.SystemId == systemId);
+    }
 }

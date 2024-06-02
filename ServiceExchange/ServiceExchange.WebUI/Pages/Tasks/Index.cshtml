@@ -2,20 +2,29 @@
 @model ServiceExchange.WebUI.Pages.Tasks.Index
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h2>@Localizer["Categories"]</h2>
-
-@if(Model.TasksList.Tasks.Any())
-{
-<ul>
-    @foreach(var category in Model.TasksList.Tasks)
-    {
-    <li>
-        <strong>@category.Title</strong> - @category.Description
-    </li>
-    }
-</ul>
-}
-else
-{
-<p>No categories found.</p>
-}
+<div class="container">
+    <h2>@Localizer["Tasks"]</h2>
+    @if(Model.TasksList.Tasks.Any())
+        {
+        @foreach(var task in Model.TasksList.Tasks)
+        { 
+            <div class="row justify-content-around">
+                <div class="col-12 row">
+                    <img src="@task.ImagePath" class="col-3" alt="categoryImage">
+                    <div class="col-7">
+                        <h5 class="">@task.Title</h5>
+                        <p class="">@task.Description</p>
+                        @if(task.StartTime != null){
+                            <p>@task.StartTime</p>
+                        }
+                        <a href="#" class="btn btn-primary">View details</a>
+                    </div>
+                </div>
+            </div>
+        }
+        }
+        else
+        {
+        <p>No tasks found.</p>
+        }
+</div>

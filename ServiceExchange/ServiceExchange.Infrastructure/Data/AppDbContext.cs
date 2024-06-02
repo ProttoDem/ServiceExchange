@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ServiceExchange.Core.CalendarAggregate;
 using ServiceExchange.Core.RoleAggregate;
 using ServiceExchange.Core.UserAggregate;
+using Task = ServiceExchange.Core.TaskAggregate.Task;
 
 namespace ServiceExchange.Infrastructure.Data;
 
@@ -27,5 +28,18 @@ public class AppDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        /*modelBuilder.Entity<Task>()
+            .HasOne(e => e.Calendar)
+            .WithOne(e => e.Task)
+            .HasForeignKey<Calendar>(e => e.TaskId)
+            .IsRequired();*/
+        
+        modelBuilder.Entity<Category>()
+            .HasMany(e => e.Tasks)
+            .WithOne(e => e.Category)
+            .HasForeignKey(e => e.CategoryId)
+            .IsRequired();
+        
+        base.OnModelCreating(modelBuilder);
     }
 }

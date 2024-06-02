@@ -1,5 +1,6 @@
 ﻿namespace ServiceExchange.Api.Users;
 
-public class GetUserResponse
+public class CreateUserResponse()
 {
+    
 }

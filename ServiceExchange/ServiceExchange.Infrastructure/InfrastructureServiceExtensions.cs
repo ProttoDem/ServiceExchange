@@ -15,18 +15,10 @@ public static class InfrastructureServiceExtensions
         ConfigurationManager config,
         ILogger logger)
     {
-        //string? connectionString = config.GetConnectionString("DefaultConnection");
-        //Guard.Against.Null(connectionString);
-        services.AddDbContext<AppDbContext>(
-            //options => options.UseSqlServer(config.GetConnectionString("ConnStr"), b=> b.MigrationsAssembly("ServiceExchange.Infrastructure"))
-                                            );
+        services.AddDbContext<AppDbContext>();
 
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
-        //services.AddScoped<IListContributorsQueryService, ListContributorsQueryService>();
-        //services.AddScoped<IDeleteContributorService, DeleteContributorService>();
-
-        //services.Configure<MailserverConfiguration>(config.GetSection("Mailserver"));
 
         logger.LogInformation("{Project} services registered", "Infrastructure");
 

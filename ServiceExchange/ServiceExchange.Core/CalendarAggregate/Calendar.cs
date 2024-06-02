@@ -1,13 +1,18 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Ardalis.GuardClauses;
 using Ardalis.SharedKernel;
+using Task = ServiceExchange.Core.TaskAggregate.Task;
 
 namespace ServiceExchange.Core.CalendarAggregate;
 
-public class Calendar(DateTime startTime, DateTime? endTime, bool? isRepeatable) : BaseEntity<Guid>, IAggregateRoot
+public class Calendar : BaseEntity<Guid>, IAggregateRoot
 {
-    public DateTime StartTime { get; private set; } = Guard.Against.NullOrOutOfSQLDateRange(startTime, nameof(startTime));
-    public DateTime? EndTime { get; private set; } = endTime;
-    public bool? IsRepeatable { get; private set; } = isRepeatable;
+    public DateTime StartTime { get; set; }
+    public DateTime? EndTime { get; set; }
+    public bool? IsRepeatable { get; set; }
+    [ForeignKey("Task")]
+    public Guid TaskId { get; set; }
+    public Task Task { get; set; } = null!;
 
     public void UpdateStartTime(DateTime newStartTime)
     {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceExchange.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using ServiceExchange.Infrastructure.Data;
 namespace ServiceExchange.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240601230714_UpdatedTaskSequences")]
+    partial class UpdatedTaskSequences
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,9 +103,6 @@ namespace ServiceExchange.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CalendarId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
@@ -230,8 +230,7 @@ namespace ServiceExchange.Infrastructure.Migrations
 
             modelBuilder.Entity("ServiceExchange.Core.TaskAggregate.Task", b =>
                 {
-                    b.Navigation("Calendar")
-                        .IsRequired();
+                    b.Navigation("Calendar");
 
                     b.Navigation("TaskUsers");
                 });
