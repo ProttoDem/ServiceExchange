@@ -11,7 +11,7 @@ namespace ServiceExchange.Core.ReportAggregate
     public class Report : BaseEntity<Guid>, IAggregateRoot
     {
         public int Rate { get; set; } = 0;
-        public Task Task { get; set; } = null!;
+        public Core.TaskAggregate.Task Task { get; set; } = null!;
         public Guid TaskId { get; set; }
         public User User { get; set; } = null!;
         public Guid UserId { get; set; }

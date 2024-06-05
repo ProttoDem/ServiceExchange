@@ -3,7 +3,7 @@ using ServiceExchange.Core.UserAggregate;
 
 namespace ServiceExchange.Core.TaskUserAggreagate;
 
-public class TaskUser : EntityBase<Guid>, IAggregateRoot
+public class TaskUser : BaseEntity<Guid>, IAggregateRoot
 {
     public Guid UserId { get; set; }
     public Guid TaskId { get; set; }

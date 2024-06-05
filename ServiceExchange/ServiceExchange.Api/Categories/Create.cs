@@ -14,10 +14,8 @@ public class Create(IMediator _mediator)
         Policies("AdminUser");
         Summary(s =>
         {
-            // XML Docs are used by default but are overridden by these properties:
-            //s.Summary = "Create a new Contributor.";
-            //s.Description = "Create a new Contributor. A valid name is required.";
-            s.ExampleRequest = new CreateCategoryRequest() { Title = "Category Title", Description = "Category Description"};
+            s.ExampleRequest = new CreateCategoryRequest() 
+                { Title = "Category Title", Description = "Category Description"};
         });
     }
 
@@ -30,7 +28,8 @@ public class Create(IMediator _mediator)
 
         if (result.IsSuccess)
         {
-            Response = new CreateCategoryResponse(result.Value, request.Title!, request.Description);
+            Response = new CreateCategoryResponse
+                (result.Value, request.Title!, request.Description);
             return;
         }
     }

@@ -3,6 +3,7 @@ using System.Reflection;
 using Ardalis.SharedKernel;
 using Microsoft.EntityFrameworkCore;
 using ServiceExchange.Core.CalendarAggregate;
+using ServiceExchange.Core.ReportAggregate;
 using ServiceExchange.Core.RoleAggregate;
 using ServiceExchange.Core.UserAggregate;
 using Task = ServiceExchange.Core.TaskAggregate.Task;
@@ -20,10 +21,12 @@ public class AppDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Core.TaskAggregate.Task> Tasks => Set<Core.TaskAggregate.Task>();
     public DbSet<Calendar> Calendars => Set<Calendar>();
+    public DbSet<Report> Reports => Set<Report>(); 
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ServiceExchangeDb;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        optionsBuilder.UseSqlServer(
+            "Server=ssw-wsa-0221;Initial Catalog=ServiceExchangeDb;User id=sa;Password=Formpipe2008;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;TrustServerCertificate=True;"); 
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

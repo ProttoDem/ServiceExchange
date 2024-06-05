@@ -44,8 +44,10 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 builder.Services.AddFastEndpoints().SwaggerDocument(o =>
   {
+    o.MaxEndpointVersion = 1;
     o.DocumentSettings = s =>
     {
+      s.DocumentName = "Initial Release";
       s.Title = "ServiceExchangeApi";
       s.Version = "v1";
     };
